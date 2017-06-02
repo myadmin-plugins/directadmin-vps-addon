@@ -15,7 +15,7 @@ return [
 	'version' => '1.0.0',
 	'type' => 'addon',
 	'hooks' => [
-		'vps.load_addons' => ['Detain\MyAdminVpsDirectadmin', 'Load'],
+		'vps.load_addons' => ['Detain\MyAdminVpsDirectadmin\Plugin', 'Load'],
 		/* 'function.requirements' => ['Detain\MyAdminVpsDirectadmin\Plugin', 'Requirements'],
 		'licenses.settings' => ['Detain\MyAdminVpsDirectadmin\Plugin', 'Settings'],
 		'licenses.activate' => ['Detain\MyAdminVpsDirectadmin\Plugin', 'Activate'],
