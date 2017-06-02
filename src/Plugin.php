@@ -10,7 +10,13 @@ class Plugin {
 	}
 
 	public static function Load(GenericEvent $event) {
-	
+		$service = $event->getSubject();
+		$addon = new Addon();
+		$addon->set_module('vps')->set_text('DirectAdmin')->set_cost(VPS_DA_COST)
+			->set_require_ip(true)->set_enable(function() {
+				require_once 'include/licenses/license.functions.inc.php';
+			})->set_disable(function() {
+			})->register();
 	}
 
 }
