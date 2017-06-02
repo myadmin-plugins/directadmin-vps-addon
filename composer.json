@@ -21,7 +21,7 @@
         "ext-soap": "*",
 	"symfony/event-dispatcher": "*",
 	"detain/myadmin-plugin-installer": "dev-master",
-	"detain/directadmin-licensing": "*"
+	"detain/myadmin-directadmin-licensing": "*"
     },
     "autoload": {
         "psr-4": {"Detain\\MyAdminVpsDirectadmin\\": "src/"}
