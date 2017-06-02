@@ -18,6 +18,7 @@ class Plugin {
 				require_once 'include/licenses/license.functions.inc.php';
 			})->set_disable(function() {
 			})->register();
+		$service->add_addon($addon);
 	}
 
 }
