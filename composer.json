@@ -24,6 +24,6 @@
 	"detain/myadmin-directadmin-licensing": "*"
     },
     "autoload": {
-        "psr-4": {"Detain\\MyAdminVpsDirectadmin\\\": "src/"}
+        "psr-4": {"Detain\\MyAdminVpsDirectadmin\\": "src/"}
     }
 }
