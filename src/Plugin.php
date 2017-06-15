@@ -13,19 +13,33 @@ class Plugin {
 		$service = $event->getSubject();
 		function_requirements('class.Addon');
 		$addon = new \Addon();
-		$addon->set_module('vps')->set_text('DirectAdmin')->set_cost(VPS_DA_COST)
-			->set_require_ip(true)->set_enable(function() {
-				$service_info = $service_order->get_service_info();
-				$settings = get_module_settings($service_order->get_module());
-				require_once 'include/licenses/license.functions.inc.php';
-				$pass = vps_get_password($service_info[$settings['PREFIX'].'_id']);
-				function_requirements('directadmin_get_best_type');
-				function_requirements('activate_directadmin');
-				$ostype = directadmin_get_best_type($module, $service_info[$settings['PREFIX'] . '_type'], $service_info, $service_extra);
-				$result = activate_directadmin($service_info[$settings['PREFIX'].'_ip'], $ostype, $pass, $GLOBALS['tf']->accounts->cross_reference($service_info[$settings['PREFIX'] . '_custid']), $module . $service_info[$settings['PREFIX'].'_id']);
-			})->set_disable(function() {
-			})->register();
+		$addon->set_module('vps')
+			->set_text('DirectAdmin')
+			->set_cost(VPS_DA_COST)
+			->set_require_ip(true)
+			->set_enable(['Detain\MyAdminVpsDirectadmin\Plugins', 'Enable'])
+			->set_disable(['Detain\MyAdminVpsDirectadmin\Plugins', 'Disable'])
+			->register();
 		$service->add_addon($addon);
+	}
+
+	public static function Enable($service_order) {
+		$service_info = $service_order->get_service_info();
+		$settings = get_module_settings($service_order->get_module());
+		require_once 'include/licenses/license.functions.inc.php';
+		$pass = vps_get_password($service_info[$settings['PREFIX'].'_id']);
+		function_requirements('directadmin_get_best_type');
+		function_requirements('activate_directadmin');
+		$ostype = directadmin_get_best_type($module, $service_info[$settings['PREFIX'] . '_type'], $service_info, $service_extra);
+		$result = activate_directadmin($service_info[$settings['PREFIX'].'_ip'], $ostype, $pass, $GLOBALS['tf']->accounts->cross_reference($service_info[$settings['PREFIX'] . '_custid']), $module . $service_info[$settings['PREFIX'].'_id']);
+	}
+
+	public static function Disable($service_order) {
+		$service_info = $service_order->get_service_info();
+		$settings = get_module_settings($service_order->get_module());
+		require_once 'include/licenses/license.functions.inc.php';
+		function_requirements('deactivate_directadmin');
+		deactivate_directadmin($service_info[$settings['PREFIX'].'_ip']);
 	}
 
 	public static function Settings(GenericEvent $event) {
