@@ -31,8 +31,8 @@ class Plugin {
 			->set_text('DirectAdmin')
 			->set_cost(VPS_DA_COST)
 			->set_require_ip(true)
-			->set_enable(['Detain\MyAdminVpsDirectadmin\Plugins', 'Enable'])
-			->set_disable(['Detain\MyAdminVpsDirectadmin\Plugins', 'Disable'])
+			->set_enable([__CLASS__, 'Enable'])
+			->set_disable([__CLASS__, 'Disable'])
 			->register();
 		$service->add_addon($addon);
 	}
