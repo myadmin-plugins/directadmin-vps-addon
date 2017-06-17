@@ -38,22 +38,22 @@ class Plugin {
 	}
 
 	public static function Enable($service_order) {
-		$service_info = $service_order->get_service_info();
+		$serviceInfo = $service_order->getServiceInfo();
 		$settings = get_module_settings($service_order->get_module());
 		require_once 'include/licenses/license.functions.inc.php';
-		$pass = vps_get_password($service_info[$settings['PREFIX'].'_id']);
+		$pass = vps_get_password($serviceInfo[$settings['PREFIX'].'_id']);
 		function_requirements('directadmin_get_best_type');
 		function_requirements('activate_directadmin');
-		$ostype = directadmin_get_best_type($module, $service_info[$settings['PREFIX'] . '_type'], $service_info, $service_extra);
-		$result = activate_directadmin($service_info[$settings['PREFIX'].'_ip'], $ostype, $pass, $GLOBALS['tf']->accounts->cross_reference($service_info[$settings['PREFIX'] . '_custid']), $module . $service_info[$settings['PREFIX'].'_id']);
+		$ostype = directadmin_get_best_type($module, $serviceInfo[$settings['PREFIX'] . '_type'], $serviceInfo, $service_extra);
+		$result = activate_directadmin($serviceInfo[$settings['PREFIX'].'_ip'], $ostype, $pass, $GLOBALS['tf']->accounts->cross_reference($serviceInfo[$settings['PREFIX'] . '_custid']), $module . $serviceInfo[$settings['PREFIX'].'_id']);
 	}
 
 	public static function Disable($service_order) {
-		$service_info = $service_order->get_service_info();
+		$serviceInfo = $service_order->getServiceInfo();
 		$settings = get_module_settings($service_order->get_module());
 		require_once 'include/licenses/license.functions.inc.php';
 		function_requirements('deactivate_directadmin');
-		deactivate_directadmin($service_info[$settings['PREFIX'].'_ip']);
+		deactivate_directadmin($serviceInfo[$settings['PREFIX'].'_ip']);
 	}
 
 	public static function Settings(GenericEvent $event) {
