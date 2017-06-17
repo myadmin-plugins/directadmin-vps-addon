@@ -30,7 +30,7 @@ class Plugin {
 		$addon->set_module('vps')
 			->set_text('DirectAdmin')
 			->set_cost(VPS_DA_COST)
-			->set_require_ip(true)
+			->set_require_ip(TRUE)
 			->set_enable([__CLASS__, 'Enable'])
 			->set_disable([__CLASS__, 'Disable'])
 			->register();
@@ -44,8 +44,8 @@ class Plugin {
 		$pass = vps_get_password($serviceInfo[$settings['PREFIX'].'_id']);
 		function_requirements('directadmin_get_best_type');
 		function_requirements('activate_directadmin');
-		$ostype = directadmin_get_best_type($module, $serviceInfo[$settings['PREFIX'] . '_type'], $serviceInfo, $service_extra);
-		$result = activate_directadmin($serviceInfo[$settings['PREFIX'].'_ip'], $ostype, $pass, $GLOBALS['tf']->accounts->cross_reference($serviceInfo[$settings['PREFIX'] . '_custid']), $module . $serviceInfo[$settings['PREFIX'].'_id']);
+		$ostype = directadmin_get_best_type($module, $serviceInfo[$settings['PREFIX'].'_type'], $serviceInfo, $service_extra);
+		$result = activate_directadmin($serviceInfo[$settings['PREFIX'].'_ip'], $ostype, $pass, $GLOBALS['tf']->accounts->cross_reference($serviceInfo[$settings['PREFIX'].'_custid']), $module.$serviceInfo[$settings['PREFIX'].'_id']);
 	}
 
 	public static function Disable($service_order) {
