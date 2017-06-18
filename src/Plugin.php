@@ -37,7 +37,7 @@ class Plugin {
 		$service->add_addon($addon);
 	}
 
-	public static function Enable($service_order) {
+	public static function Enable(\Service_Order $service_order) {
 		$serviceInfo = $service_order->getServiceInfo();
 		$settings = get_module_settings($service_order->get_module());
 		require_once 'include/licenses/license.functions.inc.php';
@@ -48,7 +48,7 @@ class Plugin {
 		$result = activate_directadmin($serviceInfo[$settings['PREFIX'].'_ip'], $ostype, $pass, $GLOBALS['tf']->accounts->cross_reference($serviceInfo[$settings['PREFIX'].'_custid']), $module.$serviceInfo[$settings['PREFIX'].'_id']);
 	}
 
-	public static function Disable($service_order) {
+	public static function Disable(\Service_Order $service_order) {
 		$serviceInfo = $service_order->getServiceInfo();
 		$settings = get_module_settings($service_order->get_module());
 		require_once 'include/licenses/license.functions.inc.php';
