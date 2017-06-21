@@ -44,7 +44,7 @@ class Plugin {
 		$pass = vps_get_password($serviceInfo[$settings['PREFIX'].'_id']);
 		function_requirements('directadmin_get_best_type');
 		function_requirements('activate_directadmin');
-		$ostype = directadmin_get_best_type($module, $serviceInfo[$settings['PREFIX'].'_type'], $serviceInfo, $service_extra);
+		$ostype = directadmin_get_best_type($module, $serviceInfo[$settings['PREFIX'].'_type'], $serviceInfo, $serviceExtra);
 		$result = activate_directadmin($serviceInfo[$settings['PREFIX'].'_ip'], $ostype, $pass, $GLOBALS['tf']->accounts->cross_reference($serviceInfo[$settings['PREFIX'].'_custid']), $module.$serviceInfo[$settings['PREFIX'].'_id']);
 	}
 
