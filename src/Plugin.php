@@ -37,9 +37,9 @@ class Plugin {
 		$service->add_addon($addon);
 	}
 
-	public static function Enable(\Service_Order $service_order) {
-		$serviceInfo = $service_order->getServiceInfo();
-		$settings = get_module_settings($service_order->get_module());
+	public static function Enable(\Service_Order $serviceOrder) {
+		$serviceInfo = $serviceOrder->getServiceInfo();
+		$settings = get_module_settings($serviceOrder->get_module());
 		require_once 'include/licenses/license.functions.inc.php';
 		$pass = vps_get_password($serviceInfo[$settings['PREFIX'].'_id']);
 		function_requirements('directadmin_get_best_type');
@@ -48,9 +48,9 @@ class Plugin {
 		$result = activate_directadmin($serviceInfo[$settings['PREFIX'].'_ip'], $ostype, $pass, $GLOBALS['tf']->accounts->cross_reference($serviceInfo[$settings['PREFIX'].'_custid']), $module.$serviceInfo[$settings['PREFIX'].'_id']);
 	}
 
-	public static function Disable(\Service_Order $service_order) {
-		$serviceInfo = $service_order->getServiceInfo();
-		$settings = get_module_settings($service_order->get_module());
+	public static function Disable(\Service_Order $serviceOrder) {
+		$serviceInfo = $serviceOrder->getServiceInfo();
+		$settings = get_module_settings($serviceOrder->get_module());
 		require_once 'include/licenses/license.functions.inc.php';
 		function_requirements('deactivate_directadmin');
 		deactivate_directadmin($serviceInfo[$settings['PREFIX'].'_ip']);
