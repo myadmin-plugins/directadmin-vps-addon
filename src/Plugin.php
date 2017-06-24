@@ -44,8 +44,8 @@ class Plugin {
 		$pass = vps_get_password($serviceInfo[$settings['PREFIX'].'_id']);
 		function_requirements('directadmin_get_best_type');
 		function_requirements('activate_directadmin');
-		$ostype = directadmin_get_best_type($module, $serviceInfo[$settings['PREFIX'].'_type'], $serviceInfo, $serviceExtra);
-		$result = activate_directadmin($serviceInfo[$settings['PREFIX'].'_ip'], $ostype, $pass, $GLOBALS['tf']->accounts->cross_reference($serviceInfo[$settings['PREFIX'].'_custid']), $module.$serviceInfo[$settings['PREFIX'].'_id']);
+		$ostype = directadmin_get_best_type(self::$module, $serviceInfo[$settings['PREFIX'].'_type'], $serviceInfo, $serviceExtra);
+		$result = activate_directadmin($serviceInfo[$settings['PREFIX'].'_ip'], $ostype, $pass, $GLOBALS['tf']->accounts->cross_reference($serviceInfo[$settings['PREFIX'].'_custid']), self::$module.$serviceInfo[$settings['PREFIX'].'_id']);
 	}
 
 	public static function doDisable(\Service_Order $serviceOrder) {
@@ -57,8 +57,7 @@ class Plugin {
 	}
 
 	public static function getSettings(GenericEvent $event) {
-		$module = 'vps';
 		$settings = $event->getSubject();
-		$settings->add_text_setting($module, 'Addon Costs', 'vps_da_cost', 'VPS DirectAdmin License:', 'This is the cost for purchasing a direct admin license on top of a VPS.', $settings->get_setting('VPS_DA_COST'));
+		$settings->add_text_setting(self::$module, 'Addon Costs', 'vps_da_cost', 'VPS DirectAdmin License:', 'This is the cost for purchasing a direct admin license on top of a VPS.', $settings->get_setting('VPS_DA_COST'));
 	}
 }
