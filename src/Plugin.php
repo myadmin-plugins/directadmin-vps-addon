@@ -27,7 +27,7 @@ class Plugin {
 		$service = $event->getSubject();
 		function_requirements('class.Addon');
 		$addon = new \Addon();
-		$addon->set_module('vps')
+		$addon->setModule('vps')
 			->set_text('DirectAdmin')
 			->set_cost(VPS_DA_COST)
 			->set_require_ip(TRUE)
