@@ -47,7 +47,7 @@ class Plugin {
 		function_requirements('activate_directadmin');
 		$serviceExtra = run_event('parse_service_extra', $serviceInfo[$settings['PREFIX'].'_extra'], self::$module);
 		$ostype = directadmin_get_best_type(self::$module, $serviceInfo[$settings['PREFIX'].'_type'], $serviceInfo, $serviceExtra);
-		$result = activate_directadmin($serviceInfo[$settings['PREFIX'].'_ip'], $ostype, $pass, $GLOBALS['tf']->accounts->cross_reference($serviceInfo[$settings['PREFIX'].'_custid']), self::$module.$serviceInfo[$settings['PREFIX'].'_id']);
+		activate_directadmin($serviceInfo[$settings['PREFIX'].'_ip'], $ostype, $pass, $GLOBALS['tf']->accounts->cross_reference($serviceInfo[$settings['PREFIX'].'_custid']), self::$module.$serviceInfo[$settings['PREFIX'].'_id']);
 	}
 
 	public static function doDisable(\Service_Order $serviceOrder, $repeatInvoiceId, $regexMatch = FALSE) {
