@@ -6,9 +6,9 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 class Plugin {
 
-	public static $name = 'Directadmin Licensing VPS Addon';
-	public static $description = 'Allows selling of Directadmin Server and VPS License Types.  More info at https://www.netenberg.com/directadmin.php';
-	public static $help = 'It provides more than one million end users the ability to quickly install dozens of the leading open source content management systems into their web space.  	Must have a pre-existing cPanel license with cPanelDirect to purchase a directadmin license. Allow 10 minutes for activation.';
+	public static $name = 'DirectAdmin VPS Addon';
+	public static $description = 'Allows selling of DirectAdmin Licenses as a VPS Addon.  DirectAdmin is a graphical web-based web hosting control panel designed to make administration of websites easier. DirectAdmin is often called DA for short.  More info at https://www.directadmin.com/';
+	public static $help = '';
 	public static $module = 'vps';
 	public static $type = 'addon';
 
@@ -41,6 +41,7 @@ class Plugin {
 		$serviceInfo = $serviceOrder->getServiceInfo();
 		$settings = get_module_settings(self::$module);
 		require_once __DIR__.'/../../../../include/licenses/license.functions.inc.php';
+		myadmin_log(self::$module, 'info', self::$name.' Activation', __LINE__, __FILE__);
 		$pass = vps_get_password($serviceInfo[$settings['PREFIX'].'_id']);
 		function_requirements('directadmin_get_best_type');
 		function_requirements('activate_directadmin');
@@ -53,6 +54,7 @@ class Plugin {
 		$serviceInfo = $serviceOrder->getServiceInfo();
 		$settings = get_module_settings(self::$module);
 		require_once __DIR__.'/../../../../include/licenses/license.functions.inc.php';
+		myadmin_log(self::$module, 'info', self::$name.' Deactivation', __LINE__, __FILE__);
 		function_requirements('deactivate_directadmin');
 		deactivate_directadmin($serviceInfo[$settings['PREFIX'].'_ip']);
 	}
