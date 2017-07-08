@@ -57,8 +57,8 @@ class Plugin {
 		myadmin_log(self::$module, 'info', self::$name.' Deactivation', __LINE__, __FILE__);
 		function_requirements('deactivate_directadmin');
 		deactivate_directadmin($serviceInfo[$settings['PREFIX'].'_ip']);
-		$email = $settings['TBLNAME'].' ID: '.$serviceInfo[$settings['PREFIX'].'_id'].'<br>'.$settings['TBLNAME'].' Hostname: '.$serviceInfo[$settings['PREFIX'].'_hostname'].'<br>Invoice: '.$repeatInvoiceId.'<br>Description: '.$repeat_invoice->getDescription().'<br>';
-		$subject = $settings['TBLNAME'].' '.$repeat_invoice->getService().' Canceled '.self::$name;
+		$email = $settings['TBLNAME'].' ID: '.$serviceInfo[$settings['PREFIX'].'_id'].'<br>'.$settings['TBLNAME'].' Hostname: '.$serviceInfo[$settings['PREFIX'].'_hostname'].'<br>Repeat Invoice: '.$repeatInvoiceId.'<br>Description: '.self::$name.'<br>';
+		$subject = $settings['TBLNAME'].' '.$serviceInfo[$settings['PREFIX'].'_id'].' Canceled '.self::$name;
 		$headers = '';
 		$headers .= 'MIME-Version: 1.0'.EMAIL_NEWLINE;
 		$headers .= 'Content-type: text/html; charset=UTF-8'.EMAIL_NEWLINE;
