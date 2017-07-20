@@ -4,6 +4,11 @@ namespace Detain\MyAdminVpsDirectadmin;
 
 use Symfony\Component\EventDispatcher\GenericEvent;
 
+/**
+ * Class Plugin
+ *
+ * @package Detain\MyAdminVpsDirectadmin
+ */
 class Plugin {
 
 	public static $name = 'DirectAdmin VPS Addon';
@@ -12,10 +17,15 @@ class Plugin {
 	public static $module = 'vps';
 	public static $type = 'addon';
 
-
+	/**
+	 * Plugin constructor.
+	 */
 	public function __construct() {
 	}
 
+	/**
+	 * @return array
+	 */
 	public static function getHooks() {
 		return [
 			self::$module.'.load_addons' => [__CLASS__, 'getAddon'],
@@ -23,6 +33,9 @@ class Plugin {
 		];
 	}
 
+	/**
+	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
+	 */
 	public static function getAddon(GenericEvent $event) {
 		$service = $event->getSubject();
 		function_requirements('class.Addon');
@@ -37,6 +50,11 @@ class Plugin {
 		$service->addAddon($addon);
 	}
 
+	/**
+	 * @param \Service_Order $serviceOrder
+	 * @param                $repeatInvoiceId
+	 * @param bool           $regexMatch
+	 */
 	public static function doEnable(\Service_Order $serviceOrder, $repeatInvoiceId, $regexMatch = FALSE) {
 		$serviceInfo = $serviceOrder->getServiceInfo();
 		$settings = get_module_settings(self::$module);
@@ -50,6 +68,11 @@ class Plugin {
 		activate_directadmin($serviceInfo[$settings['PREFIX'].'_ip'], $ostype, $pass, $GLOBALS['tf']->accounts->cross_reference($serviceInfo[$settings['PREFIX'].'_custid']), self::$module.$serviceInfo[$settings['PREFIX'].'_id']);
 	}
 
+	/**
+	 * @param \Service_Order $serviceOrder
+	 * @param                $repeatInvoiceId
+	 * @param bool           $regexMatch
+	 */
 	public static function doDisable(\Service_Order $serviceOrder, $repeatInvoiceId, $regexMatch = FALSE) {
 		$serviceInfo = $serviceOrder->getServiceInfo();
 		$settings = get_module_settings(self::$module);
@@ -66,6 +89,9 @@ class Plugin {
 		admin_mail($subject, $email, $headers, FALSE, 'admin_email_vps_da_canceled.tpl');
 	}
 
+	/**
+	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
+	 */
 	public static function getSettings(GenericEvent $event) {
 		$settings = $event->getSubject();
 		$settings->add_text_setting(self::$module, 'Addon Costs', 'vps_da_cost', 'VPS DirectAdmin License:', 'This is the cost for purchasing a direct admin license on top of a VPS.', $settings->get_setting('VPS_DA_COST'));
