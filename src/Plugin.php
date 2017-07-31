@@ -44,8 +44,8 @@ class Plugin {
 			->set_text('DirectAdmin')
 			->set_cost(VPS_DA_COST)
 			->set_require_ip(TRUE)
-			->set_enable([__CLASS__, 'doEnable'])
-			->set_disable([__CLASS__, 'doDisable'])
+			->setEnable([__CLASS__, 'doEnable'])
+			->setDisable([__CLASS__, 'doDisable'])
 			->register();
 		$service->addAddon($addon);
 	}
