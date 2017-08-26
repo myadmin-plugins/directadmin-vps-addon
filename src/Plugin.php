@@ -38,8 +38,8 @@ class Plugin {
 	 */
 	public static function getAddon(GenericEvent $event) {
 		$service = $event->getSubject();
-		function_requirements('class.Addon');
-		$addon = new \Addon();
+		function_requirements('class.AddonHandler');
+		$addon = new \AddonHandler();
 		$addon->setModule(self::$module)
 			->set_text('DirectAdmin')
 			->set_cost(VPS_DA_COST)
@@ -51,11 +51,11 @@ class Plugin {
 	}
 
 	/**
-	 * @param \ServiceOrder $serviceOrder
+	 * @param \ServiceHandler $serviceOrder
 	 * @param                $repeatInvoiceId
 	 * @param bool           $regexMatch
 	 */
-	public static function doEnable(\ServiceOrder $serviceOrder, $repeatInvoiceId, $regexMatch = FALSE) {
+	public static function doEnable(\ServiceHandler $serviceOrder, $repeatInvoiceId, $regexMatch = FALSE) {
 		$serviceInfo = $serviceOrder->getServiceInfo();
 		$settings = get_module_settings(self::$module);
 		require_once __DIR__.'/../../../../include/licenses/license.functions.inc.php';
@@ -69,11 +69,11 @@ class Plugin {
 	}
 
 	/**
-	 * @param \ServiceOrder $serviceOrder
+	 * @param \ServiceHandler $serviceOrder
 	 * @param                $repeatInvoiceId
 	 * @param bool           $regexMatch
 	 */
-	public static function doDisable(\ServiceOrder $serviceOrder, $repeatInvoiceId, $regexMatch = FALSE) {
+	public static function doDisable(\ServiceHandler $serviceOrder, $repeatInvoiceId, $regexMatch = FALSE) {
 		$serviceInfo = $serviceOrder->getServiceInfo();
 		$settings = get_module_settings(self::$module);
 		require_once __DIR__.'/../../../../include/licenses/license.functions.inc.php';
