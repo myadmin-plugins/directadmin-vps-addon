@@ -9,8 +9,8 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  *
  * @package Detain\MyAdminVpsDirectadmin
  */
-class Plugin {
-
+class Plugin
+{
 	public static $name = 'DirectAdmin VPS Addon';
 	public static $description = 'Allows selling of DirectAdmin Licenses as a VPS Addon.  DirectAdmin is a graphical web-based web hosting control panel designed to make administration of websites easier. DirectAdmin is often called DA for short.  More info at https://www.directadmin.com/';
 	public static $help = '';
@@ -20,13 +20,15 @@ class Plugin {
 	/**
 	 * Plugin constructor.
 	 */
-	public function __construct() {
+	public function __construct()
+	{
 	}
 
 	/**
 	 * @return array
 	 */
-	public static function getHooks() {
+	public static function getHooks()
+	{
 		return [
 			'function.requirements' => [__CLASS__, 'getRequirements'],
 			self::$module.'.load_addons' => [__CLASS__, 'getAddon'],
@@ -37,7 +39,8 @@ class Plugin {
 	/**
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
-	public static function getRequirements(GenericEvent $event) {
+	public static function getRequirements(GenericEvent $event)
+	{
 		$loader = $event->getSubject();
 		$loader->add_page_requirement('vps_add_directadmin', '/../vendor/detain/myadmin-directadmin-vps-addon/src/vps_add_directadmin.php');
 	}
@@ -45,7 +48,8 @@ class Plugin {
 	/**
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
-	public static function getAddon(GenericEvent $event) {
+	public static function getAddon(GenericEvent $event)
+	{
 		/**
 		 * @var \ServiceHandler $service
 		 */
@@ -55,7 +59,7 @@ class Plugin {
 		$addon->setModule(self::$module)
 			->set_text('DirectAdmin')
 			->set_cost(VPS_DA_COST)
-			->set_require_ip(TRUE)
+			->set_require_ip(true)
 			->setEnable([__CLASS__, 'doEnable'])
 			->setDisable([__CLASS__, 'doDisable'])
 			->register();
@@ -67,7 +71,8 @@ class Plugin {
 	 * @param                $repeatInvoiceId
 	 * @param bool           $regexMatch
 	 */
-	public static function doEnable(\ServiceHandler $serviceOrder, $repeatInvoiceId, $regexMatch = FALSE) {
+	public static function doEnable(\ServiceHandler $serviceOrder, $repeatInvoiceId, $regexMatch = false)
+	{
 		$serviceInfo = $serviceOrder->getServiceInfo();
 		$settings = get_module_settings(self::$module);
 		require_once __DIR__.'/../../../../include/licenses/license.functions.inc.php';
@@ -85,7 +90,8 @@ class Plugin {
 	 * @param                $repeatInvoiceId
 	 * @param bool           $regexMatch
 	 */
-	public static function doDisable(\ServiceHandler $serviceOrder, $repeatInvoiceId, $regexMatch = FALSE) {
+	public static function doDisable(\ServiceHandler $serviceOrder, $repeatInvoiceId, $regexMatch = false)
+	{
 		$serviceInfo = $serviceOrder->getServiceInfo();
 		$settings = get_module_settings(self::$module);
 		require_once __DIR__.'/../../../../include/licenses/license.functions.inc.php';
@@ -98,13 +104,14 @@ class Plugin {
 		$headers .= 'MIME-Version: 1.0'.PHP_EOL;
 		$headers .= 'Content-type: text/html; charset=UTF-8'.PHP_EOL;
 		$headers .= 'From: '.$settings['TITLE'].' <'.$settings['EMAIL_FROM'].'>'.PHP_EOL;
-		admin_mail($subject, $email, $headers, FALSE, 'admin/vps_da_canceled.tpl');
+		admin_mail($subject, $email, $headers, false, 'admin/vps_da_canceled.tpl');
 	}
 
 	/**
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
-	public static function getSettings(GenericEvent $event) {
+	public static function getSettings(GenericEvent $event)
+	{
 		$settings = $event->getSubject();
 		$settings->add_text_setting(self::$module, 'Addon Costs', 'vps_da_cost', 'VPS DirectAdmin License:', 'This is the cost for purchasing a direct admin license on top of a VPS.', $settings->get_setting('VPS_DA_COST'));
 	}
