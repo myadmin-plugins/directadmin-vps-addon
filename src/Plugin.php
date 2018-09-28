@@ -42,7 +42,7 @@ class Plugin
 	public static function getRequirements(GenericEvent $event)
 	{
 		$loader = $event->getSubject();
-		$loader->add_page_requirement('vps_add_directadmin', '/../vendor/detain/directadmin-vps-addon/src/vps_add_directadmin.php');
+		$loader->add_page_requirement('vps_add_directadmin', '/../vendor/detain/myadmin-directadmin-vps-addon/src/vps_add_directadmin.php');
 	}
 
 	/**
