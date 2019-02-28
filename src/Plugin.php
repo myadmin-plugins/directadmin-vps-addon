@@ -98,7 +98,7 @@ class Plugin
 		$serviceInfo = $serviceOrder->getServiceInfo();
 		$settings = get_module_settings(self::$module);
 		require_once __DIR__.'/../../../../include/licenses/license.functions.inc.php';
-		myadmin_log(self::$module, 'info', self::$name.' Deactivation', __LINE__, __FILE__);
+		myadmin_log(self::$module, 'info', self::$name.' Deactivation', __LINE__, __FILE__, self::$module);
 		function_requirements('deactivate_directadmin');
 		deactivate_directadmin($serviceInfo[$settings['PREFIX'].'_ip']);
 		$email = $settings['TBLNAME'].' ID: '.$serviceInfo[$settings['PREFIX'].'_id'].'<br>'.$settings['TBLNAME'].' Hostname: '.$serviceInfo[$settings['PREFIX'].'_hostname'].'<br>Repeat Invoice: '.$repeatInvoiceId.'<br>Description: '.self::$name.'<br>';
