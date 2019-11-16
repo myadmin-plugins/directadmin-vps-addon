@@ -103,7 +103,7 @@ class Plugin
 		deactivate_directadmin($serviceInfo[$settings['PREFIX'].'_ip']);
 		$email = $settings['TBLNAME'].' ID: '.$serviceInfo[$settings['PREFIX'].'_id'].'<br>'.$settings['TBLNAME'].' Hostname: '.$serviceInfo[$settings['PREFIX'].'_hostname'].'<br>Repeat Invoice: '.$repeatInvoiceId.'<br>Description: '.self::$name.'<br>';
 		$subject = $settings['TBLNAME'].' '.$serviceInfo[$settings['PREFIX'].'_id'].' Canceled '.self::$name;
-		(new MyAdmin\Mail())->adminMail($subject, $email, false, 'admin/vps_da_canceled.tpl');
+		(new \MyAdmin\Mail())->adminMail($subject, $email, false, 'admin/vps_da_canceled.tpl');
 	}
 
 	/**
