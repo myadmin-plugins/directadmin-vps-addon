@@ -13,8 +13,8 @@
  */
 function vps_add_directadmin()
 {
-	function_requirements('class.AddServiceAddon');
-	$addon = new AddServiceAddon();
-	$addon->load(__FUNCTION__, 'DirectAdmin', 'vps', VPS_DA_COST, 'da');
-	$addon->process();
+    function_requirements('class.AddServiceAddon');
+    $addon = new AddServiceAddon();
+    $addon->load(__FUNCTION__, 'DirectAdmin', 'vps', VPS_DA_COST, 'da');
+    $addon->process();
 }
