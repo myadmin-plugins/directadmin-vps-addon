@@ -80,7 +80,7 @@ class Plugin
         $settings = get_module_settings(self::$module);
         require_once __DIR__.'/../../../../include/licenses/license.functions.inc.php';
         myadmin_log(self::$module, 'info', self::$name.' Activation', __LINE__, __FILE__, self::$module, $serviceInfo[$settings['PREFIX'].'_id']);
-        $pass = vps_get_password($serviceInfo[$settings['PREFIX'].'_id']);
+        $pass = vps_get_password($serviceInfo[$settings['PREFIX'].'_id'], $serviceInfo[$settings['PREFIX'].'_custid']);
         function_requirements('directadmin_get_best_type');
         function_requirements('activate_directadmin');
         $serviceExtra = run_event('parse_service_extra', $serviceInfo[$settings['PREFIX'].'_extra'], self::$module);
