@@ -115,6 +115,8 @@ class Plugin
          * @var \MyAdmin\Settings $settings
          **/
         $settings = $event->getSubject();
+        $settings->setTarget('module');
         $settings->add_text_setting(self::$module, _('Addon Costs'), 'vps_da_cost', _('VPS DirectAdmin License'), _('This is the cost for purchasing a direct admin license on top of a VPS.'), $settings->get_setting('VPS_DA_COST'));
+        $settings->setTarget('global');
     }
 }
