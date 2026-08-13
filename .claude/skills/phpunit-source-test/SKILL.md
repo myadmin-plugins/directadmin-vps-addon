@@ -1,6 +1,6 @@
 ---
 name: phpunit-source-test
-description: Writes PHPUnit 9 source-reading tests that verify PHP file structure without executing code. Use when user says 'write tests', 'add test for', or adds/modifies files in src/. Tests use file_get_contents() + assertStringContainsString/assertMatchesRegularExpression for procedural files, and ReflectionClass for class files. Do NOT use for integration tests, mock-based tests, or tests that exercise runtime behavior. NOTE: for a plugin's contract/behavioral tests (tests/ContractTest.php, the shared harness, composer myadmin:scaffold-tests) use the plugin-contract-tests skill instead — this skill's reflection-only guidance predates that harness.
+description: Writes PHPUnit 9 source-reading tests that verify PHP file structure without executing code. Use when user says 'write tests', 'add test for', or adds/modifies files in src/. Tests use file_get_contents() + assertStringContainsString/assertMatchesRegularExpression for procedural files, and ReflectionClass for class files. Do NOT use for integration tests, mock-based tests, or tests that exercise runtime behavior. For a plugin's contract or behavioral tests (tests/ContractTest.php, the shared harness, composer myadmin:scaffold-tests) use the plugin-contract-tests skill instead — this skill's reflection-only guidance predates that harness.
 ---
 <!-- myadmin-contract-harness-notice -->
 > ### ⚠️ Read this before the rest of the file
